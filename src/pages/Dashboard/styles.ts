@@ -1,11 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
+
+interface FormProps {
+  hasError: boolean;
+}
+
 export const Container = styled.div`
-  max-width: 710px;
-  width: 100%;
+  max-width: 714px;
+  width: 90%;
 
     a {
+      width: 100%;
+      height: 112px;
       margin-top: 120px;
       text-decoration: none;
       color: #3D3D4D;
@@ -14,6 +21,8 @@ export const Container = styled.div`
       background-color: #fff;
       border-radius: 5px;  
       transition: transform 0.2s;
+
+      position: relative;
 
       &:hover {
         transform: translateX(10px);
@@ -47,7 +56,11 @@ export const Container = styled.div`
               color: #A8A8B3;
             }
         }
-
+      
+      svg {
+        position: absolute;
+        right: 10px;
+      }
     }
 `;
 
@@ -59,7 +72,7 @@ export const Title = styled.h1`
   margin-top: 80px;
 `;
 
-export const Form = styled.form`
+export const Form = styled.form<FormProps>`
   margin-top: 40px;
 
   display: flex;
@@ -68,8 +81,16 @@ export const Form = styled.form`
       flex:1;
       width: 500px;
       height: 70px;
-      border: 0;
+      border: 2px solid #fff;
+      border-right: 0;
       border-radius: 5px 0px 0px 5px;
+      outline: 0;
+
+      ${
+        props => props.hasError && css`
+          border-color: #c52040;
+        `
+      }
 
       &::placeholder{
         color: #A8A8B3;
@@ -92,4 +113,9 @@ export const Form = styled.form`
       }
     }
 
+`;
+
+export const Error = styled.span`
+  font-size: 16px;
+  color: #c52040;
 `;
